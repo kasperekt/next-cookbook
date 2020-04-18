@@ -1,0 +1,16 @@
+.page {
+  max-width: var(--max-page-width);
+  margin: 20px auto;
+}
+
+.header {
+  box-shadow: 0 0 5px 3px rgba(#000, 0.1);
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  display: flex;
+}
+
+.logo {
+  margin-right: 24px;
+}
