@@ -1,6 +1,10 @@
 import '../styles/main.scss'
+import Layout from '../layout/Layout'
 
-// This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }: any) {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
