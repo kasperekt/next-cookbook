@@ -24,14 +24,14 @@ export default function Layout({ children }: Props) {
   return (
     <div className={css.layout}>
       <header className={css.header}>
-        <div className={css.logo}>Cookbook</div>
+        <div className={css.logo}>🔪</div>
         <nav>
           <Link href='/'>
             <a className={css.navLink}>Przepisy</a>
           </Link>
 
-          <Link href='/secret'>
-            <a className={css.navLink}>Sekretna strona</a>
+          <Link href='/ingredients'>
+            <a className={css.navLink}>Składniki</a>
           </Link>
 
           {loggedIn ? (

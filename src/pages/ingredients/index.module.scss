@@ -1,0 +1,16 @@
+@import '../../styles/mixins';
+
+.list {
+  width: 100%;
+}
+
+.heading,
+.ingredient {
+  @include spacing;
+}
+
+.ingredient {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}

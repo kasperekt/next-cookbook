@@ -1,22 +1,11 @@
+@import '../styles/mixins';
+
 .page {
-  max-width: var(--max-page-width);
-  margin: 20px auto;
-}
+  @include desktop {
+    margin: 0 20px;
+  }
 
-.header {
-  box-shadow: 0 0 5px 3px rgba(#000, 0.1);
-  border-radius: 5px;
-  padding: 8px 12px;
-  margin-bottom: 12px;
-  display: flex;
-}
-
-.logo {
-  margin-right: 24px;
-}
-
-.navLink {
-  &:not(:last-child) {
-    margin-right: 12px;
+  &.padded {
+    @include spacing;
   }
 }
