@@ -3,6 +3,7 @@ import auth0 from '../../utils/auth0'
 
 export default async function apiLogin(req: NextApiRequest, res: NextApiResponse) {
   try {
+    console.log('Env', process.env)
     await auth0.handleLogin(req, res)
   } catch (error) {
     console.error('Login error', error)
