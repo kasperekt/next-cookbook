@@ -3,6 +3,7 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { gql } from 'apollo-boost'
 import client from '../../api/dato'
 import { Dato } from '../../api/model'
+import Markdown from 'react-markdown'
 import Page from '../../layout/Page'
 import Heading from '../../components/Heading'
 import css from './[slug].module.scss'
@@ -15,7 +16,11 @@ export default function IngredientDetails({ ingredient }: Props) {
   return (
     <Page title={ingredient.name}>
       <Heading level='1'>{ingredient.name}</Heading>
-      {ingredient.info ? <p>{ingredient.info}</p> : <p className={css.noInfo}>Brak informacji</p>}
+      {ingredient.info ? (
+        <Markdown source={ingredient.info} />
+      ) : (
+        <p className={css.noInfo}>Brak informacji</p>
+      )}
     </Page>
   )
 }
