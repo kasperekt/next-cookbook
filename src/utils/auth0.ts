@@ -1,5 +1,20 @@
 import { initAuth0 } from '@auth0/nextjs-auth0'
 
+const requiredKeys = [
+  'AUTH0_DOMAIN',
+  'AUTH0_CLIENT_ID',
+  'AUTH0_CLIENT_SECRET',
+  'AUTH0_REDIRECT_URI',
+  'AUTH0_LOGOUT_REDIRECT_URI',
+]
+
+for (const key of requiredKeys) {
+  if (!(key in process.env)) {
+    console.error('Env', process.env)
+    throw new Error(`"${key}" should be defined.`)
+  }
+}
+
 export default initAuth0({
   domain: process.env.AUTH0_DOMAIN!,
   clientId: process.env.AUTH0_CLIENT_ID!,
