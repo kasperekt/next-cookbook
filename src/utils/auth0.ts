@@ -8,11 +8,17 @@ const requiredKeys = [
   'AUTH0_LOGOUT_REDIRECT_URI',
 ]
 
+const missingKeys = []
+
 for (const key of requiredKeys) {
   if (!(key in process.env)) {
-    console.error('Env', process.env)
-    throw new Error(`"${key}" should be defined.`)
+    missingKeys.push(key)
   }
+}
+
+if (missingKeys.length > 0) {
+  const joinedKeys = missingKeys.map((key) => `"${key}"`).join(', ')
+  throw new Error(`${joinedKeys} must be defined!`)
 }
 
 export default initAuth0({
