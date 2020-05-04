@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req }) => 
     }
   }
 
-  console.log('Will look for ....')
+  console.log('Will look for ....', process.env.GQL_API_TOKEN)
   const response = await client.query<GetIngredientsListResponse>({
     query: getIngredientsListQuery,
   })
