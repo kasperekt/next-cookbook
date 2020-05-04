@@ -19,6 +19,10 @@
   }
 }
 
+.navigation {
+  display: flex;
+}
+
 .logo {
   margin-right: 24px;
 }
@@ -26,5 +30,9 @@
 .navLink {
   &:not(:last-child) {
     margin-right: 12px;
+  }
+
+  &.rightSide {
+    align-self: flex-end;
   }
 }

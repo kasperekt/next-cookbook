@@ -1,4 +1,5 @@
 import React, { useState, useEffect, ReactNode } from 'react'
+import cn from 'classnames'
 import Link from 'next/link'
 import css from './Layout.module.scss'
 
@@ -25,22 +26,24 @@ export default function Layout({ children }: Props) {
     <div className={css.layout}>
       <header className={css.header}>
         <div className={css.logo}>🔪</div>
-        <nav>
+        <nav className={css.navigation}>
           <Link href='/'>
             <a className={css.navLink}>Przepisy</a>
           </Link>
 
-          <Link href='/ingredients'>
-            <a className={css.navLink}>Składniki</a>
-          </Link>
-
           {loggedIn ? (
-            <Link href='/api/logout'>
-              <a className={css.navLink}>Wyloguj</a>
-            </Link>
+            <>
+              <Link href='/ingredients'>
+                <a className={css.navLink}>Składniki</a>
+              </Link>
+
+              <Link href='/api/logout'>
+                <a className={cn(css.navLink, css.rightSide)}>Wyloguj</a>
+              </Link>
+            </>
           ) : (
             <Link href='/api/login'>
-              <a className={css.navLink}>Zaloguj</a>
+              <a className={cn(css.navLink, css.rightSide)}>Zaloguj</a>
             </Link>
           )}
         </nav>
