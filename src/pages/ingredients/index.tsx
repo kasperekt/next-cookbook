@@ -71,9 +71,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req }) => 
     }
   }
 
+  console.log('Will look for ....')
   const response = await client.query<GetIngredientsListResponse>({
     query: getIngredientsListQuery,
   })
+  console.log('YES!')
 
   return {
     props: {
