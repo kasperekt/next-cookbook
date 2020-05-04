@@ -1,5 +1,6 @@
-import React from 'react'
-import { GetStaticProps, GetStaticPaths } from 'next'
+import React, { useEffect } from 'react'
+import { GetServerSideProps } from 'next'
+import Router from 'next/router'
 import { gql } from 'apollo-boost'
 import client from '../../api/dato'
 import { Dato } from '../../api/model'
@@ -7,15 +8,25 @@ import Markdown from 'react-markdown'
 import Page from '../../layout/Page'
 import Heading from '../../components/Heading'
 import css from './[slug].module.scss'
+import secure from '../../utils/secure'
+import { useRedirectIf } from '../../hooks'
 
 type Props = {
-  ingredient: Dato.Ingredient
+  ingredient?: Dato.Ingredient
+  redirectTo?: string
 }
 
-export default function IngredientDetails({ ingredient }: Props) {
+export default function IngredientDetails({ ingredient, redirectTo = '/' }: Props) {
+  useRedirectIf(!ingredient, redirectTo)
+
+  if (!ingredient) {
+    return null
+  }
+
   return (
-    <Page title={ingredient.name}>
-      <Heading level='1'>{ingredient.name}</Heading>
+    <Page title={ingredient?.name}>
+      <Heading level='1'>{ingredient?.name}</Heading>
+
       {ingredient.info ? (
         <Markdown source={ingredient.info} />
       ) : (
@@ -27,31 +38,6 @@ export default function IngredientDetails({ ingredient }: Props) {
 
 type UrlQuery = {
   slug: string
-}
-
-type GetPathsQueryResult = {
-  allIngredients: {
-    slug: string
-  }[]
-}
-
-const getPathsQuery = gql`
-  query GetPathsQuery {
-    allIngredients {
-      slug
-    }
-  }
-`
-
-export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
-  const response = await client.query<GetPathsQueryResult>({
-    query: getPathsQuery,
-  })
-
-  return {
-    paths: response.data.allIngredients.map(({ slug }) => ({ params: { slug } })),
-    fallback: false,
-  }
 }
 
 type GetIngredientQueryResult = {
@@ -74,10 +60,18 @@ const getIngredientQuery = gql`
   }
 `
 
-export const getStaticProps: GetStaticProps<Props, UrlQuery> = async (context) => {
+export const getServerSideProps: GetServerSideProps<Props, UrlQuery> = async ({ req, params }) => {
+  if (!(await secure(req))) {
+    return {
+      props: {
+        redirectTo: '/',
+      },
+    }
+  }
+
   const response = await client.query<GetIngredientQueryResult, { slug: string }>({
     query: getIngredientQuery,
-    variables: { slug: context.params!.slug },
+    variables: { slug: params!.slug },
   })
 
   return {
