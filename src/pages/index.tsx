@@ -47,7 +47,7 @@ const getRecipesQuery = gql`
       slug
       createdAt
       coverPhoto {
-        url
+        url(imgixParams: { w: "300", h: "300", dpi: "2" })
       }
     }
   }
