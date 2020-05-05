@@ -8,7 +8,6 @@ import Heading from '../../components/Heading'
 import css from './index.module.scss'
 import Link from 'next/link'
 import secure from '../../utils/secure'
-import Router from 'next/router'
 import { useRedirectIf } from '../../hooks'
 
 type Props = {
@@ -71,11 +70,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req }) => 
     }
   }
 
-  console.log('Will look for ....', process.env.GQL_API_TOKEN)
   const response = await client.query<GetIngredientsListResponse>({
     query: getIngredientsListQuery,
   })
-  console.log('YES!')
 
   return {
     props: {
