@@ -1,0 +1,14 @@
+.ingredientsList {
+  display: block;
+}
+
+.ingredient {
+  display: block;
+}
+
+.steps {
+  :global(ol) {
+    padding-left: 20px;
+    list-style: decimal;
+  }
+}

@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next'
 import { gql } from 'apollo-boost'
 import client from '../api/dato'
 import css from './index.module.scss'
+import Link from 'next/link'
 
 type Props = {
   allRecipes: GetRecipesQueryResult['allRecipes']
@@ -21,7 +22,9 @@ export default function Home({ allRecipes }: Props) {
             key={recipe.slug}
             style={{ backgroundImage: `url(${recipe.coverPhoto.url})` }}
           >
-            <div className={css.recipeName}>{recipe.name}</div>
+            <Link href='/recipes/[slug]' as={`/recipes/${recipe.slug}`}>
+              <a className={css.recipeName}>{recipe.name}</a>
+            </Link>
           </div>
         ))}
       </div>

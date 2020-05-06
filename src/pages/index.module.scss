@@ -16,9 +16,8 @@
   border-radius: 6px;
   box-shadow: 0 0 8px 3px rgba(#000, 0.1);
   background-position: 50% 50%;
-  background-repeat: no-repeat;
   background-size: cover;
-  color: #fff;
+  background-repeat: no-repeat;
 }
 
 .recipeName {
@@ -29,4 +28,6 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(3px);
+  cursor: pointer;
+  color: #fff;
 }
